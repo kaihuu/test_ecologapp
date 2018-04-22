@@ -30,8 +30,49 @@
     return
 
 @Mapgenerate = (divname, latdata, longdata) ->
-    L.mapbox.accessToken = 'pk.eyJ1Ijoia2FpaHV1IiwiYSI6ImNqZnhzbGoxeTRxYTMyd3FvZGdicjNoeDkifQ.yxJUITl3Zaa5ML5TSrGsUA';
-    map = L.mapbox.map(divname, 'mapbox.streets').setView([35.475293, 139.588570], 16)
-    myIcon = L.divIcon({className: 'my-div-icon'});
-    L.marker([35.475293, 139.588570]).addTo(map);
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia2FpaHV1IiwiYSI6ImNqZnhzbGoxeTRxYTMyd3FvZGdicjNoeDkifQ.yxJUITl3Zaa5ML5TSrGsUA';
+    
+    geojson = {
+        type: 'FeatureCollection',
+        features: [{
+        type: 'Feature',
+        geometry: {
+        type: 'Point',
+        coordinates: [-77.032, 38.913]
+        },
+        properties: {
+        title: 'Mapbox',
+        description: 'Washington, D.C.'
+        }
+        },
+        {
+        type: 'Feature',
+        geometry: {
+        type: 'Point',
+        coordinates: [-122.414, 37.776]
+        },
+        properties: {
+        title: 'Mapbox',
+        description: 'San Francisco, California'
+        }
+        }]
+    }
+
+    map = new mapboxgl.Map({
+    container: divname
+    style: 'mapbox://styles/mapbox/streets-v9'
+    center: [-96, 37.8]
+    zoom: 3
+    })
+
+    geojson.features.forEach((marker) ->
+        el = document.createElement(divname)
+        el.className = 'marker'
+        new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map)
+        return
+    )
+    
+
+
+    
     return
