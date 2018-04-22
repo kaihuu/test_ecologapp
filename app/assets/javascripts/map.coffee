@@ -38,22 +38,11 @@
         type: 'Feature',
         geometry: {
         type: 'Point',
-        coordinates: [[139.587365, 35.474575]]
+        coordinates: [[139.587365, 35.474575], [139.587574, 35.475051]]
         },
         properties: {
         title: 'Mapbox',
         description: 'Washington, D.C.'
-        }
-        },
-        {
-        type: 'Feature',
-        geometry: {
-        type: 'Point',
-        coordinates: [[139.587574, 35.475051]]
-        },
-        properties: {
-        title: 'Mapbox',
-        description: 'San Francisco, California'
         }
         }]
     }
@@ -66,9 +55,9 @@
     })
 
     geojson.features.forEach((marker) ->
-        el = document.createElement(divname)
-        el.className = 'marker'
-        for i in [0..marker.geometry.coordinates.length - 1]
+        for i in [0..marker.geometry.coordinates.length-1]
+            el = document.createElement(divname)
+            el.className = 'marker'
             new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates[i]).addTo(map)
         return
     )
