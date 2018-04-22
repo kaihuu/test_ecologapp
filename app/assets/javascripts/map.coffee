@@ -38,7 +38,7 @@
         type: 'Feature',
         geometry: {
         type: 'Point',
-        coordinates: [-77.032, 38.913]
+        coordinates: [[139.587365, 35.474575]]
         },
         properties: {
         title: 'Mapbox',
@@ -49,7 +49,7 @@
         type: 'Feature',
         geometry: {
         type: 'Point',
-        coordinates: [-122.414, 37.776]
+        coordinates: [[139.587574, 35.475051]]
         },
         properties: {
         title: 'Mapbox',
@@ -60,15 +60,16 @@
 
     map = new mapboxgl.Map({
     container: divname
-    style: 'mapbox://styles/mapbox/streets-v9'
-    center: [-96, 37.8]
-    zoom: 3
+    style: 'mapbox://styles/kaihuu/cjgav54yi2xwc2st2ns0uzwdz'
+    center: [139.587365, 35.474575]
+    zoom: 17
     })
 
     geojson.features.forEach((marker) ->
         el = document.createElement(divname)
         el.className = 'marker'
-        new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map)
+        for i in [0..marker.geometry.coordinates.length - 1]
+            new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates[i]).addTo(map)
         return
     )
     
