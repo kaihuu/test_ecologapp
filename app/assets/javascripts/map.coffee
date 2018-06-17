@@ -39,6 +39,9 @@ $(document).on('turbolinks:load', ready)
 
     return
 
+
+
+
 @Mapgenerate = (divname, latdata, longdata) ->
     mapboxgl.accessToken = 'pk.eyJ1Ijoia2FpaHV1IiwiYSI6ImNqZnhzbGoxeTRxYTMyd3FvZGdicjNoeDkifQ.yxJUITl3Zaa5ML5TSrGsUA';
     
@@ -74,4 +77,52 @@ $(document).on('turbolinks:load', ready)
         
     return
 
+@AnimeGraph = () ->
+    trace1 = {
+    x: [1, 2, 3]
+    y: [0, 0.5, 1]
+    mode: 'markers'
+    marker: {
+        size: 10
+        showscale : false
+    }
+    }
+    data = [trace1]
+    layout = {
+    title: 'Trip Data'
+    }
+    Plotly.newPlot('graph', data, layout)
 
+    return
+
+@randomize = () ->
+    trace1 = {
+    data: [{y: [Math.random(), Math.random(), Math.random()]}],
+    traces: [0],
+    layout: {}
+    }
+    trace2 = {
+    transition: {
+      duration: 500,
+      easing: 'cubic-in-out'
+    }
+    }
+    Plotly.animate('graph', trace1, trace2)
+
+    return
+
+@datachange = (ydata) ->
+    trace1 = {
+    data: [{y: ydata}],
+    traces: [0],
+    layout: {}
+    }
+    trace2 = {
+    transition: {
+      duration: 500,
+      easing: 'cubic-in-out'
+    }
+    }
+    Plotly.animate('graph', trace1, trace2)
+
+    return
