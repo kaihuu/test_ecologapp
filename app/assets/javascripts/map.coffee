@@ -3,6 +3,16 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
+ready = ->
+  $('#slider').slider(
+    min: 0,
+    max: 100,
+    step: 1,
+    animate: 'fast',
+  
+   );
+$(document).ready(ready)
+$(document).on('turbolinks:load', ready)
 
 @Graph = (xdata, ydata, colordata) ->
     myPlot = document.getElementById('graph')
@@ -61,8 +71,7 @@
             new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates[i]).addTo(map)
         return
     )
-    
-
-
-    
+        
     return
+
+
